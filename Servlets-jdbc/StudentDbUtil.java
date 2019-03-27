@@ -51,9 +51,7 @@ public class StudentDbUtil {
         }
         finally {
             //close JDBC objects
-
             close(con,stm,result);
-
         }
     }
 
@@ -113,9 +111,7 @@ public class StudentDbUtil {
         int studentId;
 
         try{
-
             studentId = Integer.parseInt(theStudentId);
-
             con = dataSource.getConnection();
             String sql = "SELECT * FROM student WHERE id=?";
             statement = con.prepareStatement(sql);
@@ -131,7 +127,6 @@ public class StudentDbUtil {
                 String phoneNum = result.getString("phone_number");
 
                 theStudent = new Student(studentId,firstName,lastName,email,phoneNum);
-
             }
             else{
                 throw new Exception("Could not find student id: " + studentId);
@@ -149,7 +144,6 @@ public class StudentDbUtil {
         PreparedStatement statement = null;
 
         try {
-
             con = dataSource.getConnection();
 
             String sql = "UPDATE student " +
@@ -176,7 +170,6 @@ public class StudentDbUtil {
         PreparedStatement statement = null;
 
         try{
-
             int studentId = Integer.parseInt(theStudentId);
 
             con = dataSource.getConnection();
@@ -186,7 +179,6 @@ public class StudentDbUtil {
             statement.setInt(1,studentId);
 
             statement.execute();
-
         }
         finally {
             close(con,statement,null);
@@ -220,7 +212,6 @@ public class StudentDbUtil {
         ResultSet result = null;
 
         try{
-
             con = dataSource.getConnection();
             String sql = "SELECT id FROM student WHERE email=? AND id<>?";
             statement = con.prepareStatement(sql);
