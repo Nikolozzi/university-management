@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SubjectDbUtil {
-
     private DataSource dataSource;
 
     public SubjectDbUtil(DataSource dataSource){
@@ -25,7 +24,6 @@ public class SubjectDbUtil {
         ResultSet result = null;
 
         try{
-
             con = dataSource.getConnection();
             String sql = "SELECT * FROM subject ORDER BY subject_name";
 
@@ -40,13 +38,11 @@ public class SubjectDbUtil {
                 Subject subject = new Subject(id,subjName,creditNum);
                 subjects.add(subject);
             }
-
             return subjects;
         }
         finally {
             close(con,statement,result);
         }
-
     }
 
     private void close(Connection con, Statement statement, ResultSet result) {
@@ -112,7 +108,6 @@ public class SubjectDbUtil {
         ResultSet result = null;
 
         try{
-
             con = dataSource.getConnection();
             String sql = "SELECT subject_id from subject WHERE subject_name=?";
             statement = con.prepareStatement(sql);
@@ -133,7 +128,6 @@ public class SubjectDbUtil {
         ResultSet result = null;
 
         try{
-
             con = dataSource.getConnection();
             String sql = "SELECT COUNT(*) AS subjCount FROM subject";
             statement = con.prepareStatement(sql);
