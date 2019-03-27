@@ -25,7 +25,6 @@ public class SubjectDbUtil {
         ResultSet result = null;
 
         try{
-
             con = dataSource.getConnection();
             String sql = "SELECT * FROM subject ORDER BY subject_name";
 
@@ -46,7 +45,6 @@ public class SubjectDbUtil {
         finally {
             close(con,statement,result);
         }
-
     }
 
     private void close(Connection con, Statement statement, ResultSet result) {
@@ -112,7 +110,6 @@ public class SubjectDbUtil {
         ResultSet result = null;
 
         try{
-
             con = dataSource.getConnection();
             String sql = "SELECT subject_id from subject WHERE subject_name=?";
             statement = con.prepareStatement(sql);
@@ -127,13 +124,11 @@ public class SubjectDbUtil {
     }
 
     public int countSubjects() throws Exception {
-
         Connection con = null;
         PreparedStatement statement = null;
         ResultSet result = null;
 
         try{
-
             con = dataSource.getConnection();
             String sql = "SELECT COUNT(*) AS subjCount FROM subject";
             statement = con.prepareStatement(sql);
