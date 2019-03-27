@@ -67,7 +67,6 @@ public class StudentSubjectController extends HttpServlet {
 
         RequestDispatcher dispatcher = null;
 
-
         if(addSubjError != null){
             dispatcher = request.getRequestDispatcher("/add-subject-form.jsp");
             request.setAttribute("ADD_SUBJECT_ERROR",addSubjError);
@@ -94,9 +93,8 @@ public class StudentSubjectController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        
         try {
-
             String theCommand = request.getParameter("command");
             if(theCommand == null){
                 theCommand = "LIST";
@@ -123,7 +121,6 @@ public class StudentSubjectController extends HttpServlet {
                     break;
                  default:
                      listStudentsSubjects(request, response);
-
             }
         }
         catch(Exception e){
@@ -141,7 +138,6 @@ public class StudentSubjectController extends HttpServlet {
     }
 
     private void loadSubject(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
         List<Subject> subjects = subjectDbUtil.getSubjects();
         request.setAttribute("THE_SUBJECTS", subjects);
 
@@ -151,7 +147,6 @@ public class StudentSubjectController extends HttpServlet {
 
 
     private String registerStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
         String studentId = request.getParameter("studentId");
         if(studentId.isEmpty())
             return "Empty Field!";
@@ -171,8 +166,6 @@ public class StudentSubjectController extends HttpServlet {
         return null;
     }
 
-
-
     private void deleteSubject(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String theSubjectId = request.getParameter("subjectId");
 
@@ -182,13 +175,11 @@ public class StudentSubjectController extends HttpServlet {
     }
 
     private void deleteStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
         String theStudentId = request.getParameter("studentId");
 
         studentDbUtil.deleteStudent(theStudentId);
 
         listStudentsSubjects(request,response);
-
     }
 
 
@@ -219,7 +210,7 @@ public class StudentSubjectController extends HttpServlet {
 
     private String checkStudentUpdated(int id, String firstName, String lastName, String email, String phone)
     throws Exception {
-
+        
         if(firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phone.isEmpty())
             return "Empty Field!";
 
@@ -296,7 +287,6 @@ public class StudentSubjectController extends HttpServlet {
     private String checkStudentAdded(String firstName, String lastName, String email, String phone) throws Exception {
 
         //check firstName
-
         if(firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phone.isEmpty())
             return "Empty Field!";
 
@@ -317,16 +307,13 @@ public class StudentSubjectController extends HttpServlet {
                 return "Invalid Phone Number!";
         }
 
-
         //check if the user email already exists
-
         if(studentDbUtil.checkEmail(email)) {
             return "Email already exists!";
         }
 
         return null;
     }
-
 
     private String addSubject(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String subjName = request.getParameter("subjName");
@@ -366,10 +353,8 @@ public class StudentSubjectController extends HttpServlet {
     private void listStudentsSubjects(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         //get students from db util
-
         List<Student> students = studentDbUtil.getStudents();
         List<Subject> subjects = subjectDbUtil.getSubjects();
-
 
         //count total number of subjects and students
         int totalStudents = studentDbUtil.countStudents();
@@ -383,7 +368,6 @@ public class StudentSubjectController extends HttpServlet {
         //send to JSP(view)
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/list-students.jsp");
-
 
         dispatcher.forward(request,response);
     }
