@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDbUtil {
-
     private DataSource dataSource;
 
     public StudentDbUtil(DataSource theDataSource){
@@ -53,9 +52,7 @@ public class StudentDbUtil {
         }
         finally {
             //close JDBC objects
-
             close(con,stm,result);
-
         }
     }
 
@@ -115,7 +112,6 @@ public class StudentDbUtil {
         int studentId;
 
         try{
-
             studentId = Integer.parseInt(theStudentId);
 
             con = dataSource.getConnection();
@@ -151,7 +147,6 @@ public class StudentDbUtil {
         PreparedStatement statement = null;
 
         try {
-
             con = dataSource.getConnection();
 
             String sql = "UPDATE student " +
@@ -178,7 +173,6 @@ public class StudentDbUtil {
         PreparedStatement statement = null;
 
         try{
-
             int studentId = Integer.parseInt(theStudentId);
 
             con = dataSource.getConnection();
@@ -193,7 +187,6 @@ public class StudentDbUtil {
         finally {
             close(con,statement,null);
         }
-
     }
 
     public boolean checkEmail(String email) throws Exception {
@@ -216,13 +209,11 @@ public class StudentDbUtil {
     }
 
     public boolean checkEmailUpdated(int id, String email) throws Exception {
-
         Connection con = null;
         PreparedStatement statement = null;
         ResultSet result = null;
 
         try{
-
             con = dataSource.getConnection();
             String sql = "SELECT id FROM student WHERE email=? AND id<>?";
             statement = con.prepareStatement(sql);
